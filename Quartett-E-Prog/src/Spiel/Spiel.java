@@ -32,7 +32,7 @@ public class Spiel {
 	System.out.println("Sie haben"+ PunkteA +"Punkte, der Computer hat"+ PunkteB +"Punkte.");
 	}
 	
-	
+
 	
 	private static void vergleichen(int wertSpielerA, int wertSpielerB)
 	{if(wertSpielerA<wertSpielerB)
@@ -42,7 +42,7 @@ public class Spiel {
 	
 	}
 	
-	private static void RundenAbfrage()
+	private static void RundenAbfrage()	// Runden anzahlen überdenken -> muss gerade Anzahl sein.
 	{System.out.println("Wollen Sie 2,4 oder 6 Runden Spielen. Bitte die Entsprechende Zahl in die Konsole Eingeben.");
 	int runde = scanner.nextInt();
 	switch(runde) {
@@ -65,13 +65,13 @@ public class Spiel {
 		for(int i=0; i< Deck.length/2; i++)
 		{
 			if(i%2 == 0) {
-				DeckA[i] = SpielKarten[i];
+				DeckA[i] = Gemischt[i];
 			}
 		}
 		for(int i=Deck.length/2; i<= Deck.length; i++)
 		{
 			if(i%2 == 0) {
-				DeckB[i] = SpielKarten[i];
+				DeckB[i] = Gemischt[i];
 			}
 		}
 		
@@ -108,7 +108,7 @@ public class Spiel {
 		return x;
 	}
 	
-	private static String passenderName(Karte oben, int Nummer) {
+	private static String passenderName(Karte oben, int Nummer) { // Attribut Namen einfügen
 		String x ="";
 		switch(Nummer) {
 		case 1 : 
@@ -159,7 +159,7 @@ public class Spiel {
 	
 	
 	
-	private static void karteAnzeigen(Karte aktuell) {
+	private static void karteAnzeigen(Karte aktuell) { // Attribut Namen einfügen und schöner ausgeben.
 		System.out.println("Ihre Karte:"+ aktuell.getName());
 		System.out.println("Ihre Karte hat folgende Werte:");
 		System.out.println("1-A1:"+aktuell.getAttribut1());
