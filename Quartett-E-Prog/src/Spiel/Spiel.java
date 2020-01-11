@@ -17,17 +17,19 @@ public class Spiel {
 	// Karten können als Objekte erzeugt werden.	
 	//	Karte Karte1 = new Karte("Name",1,3,7);
 		
+		Spieler MitSpieler1 = new Spieler("Tim", DeckB);
+		
 	RundenAbfrage();
-	austeilen(Deck);
+	austeilen(Deck, MitSpieler1);
 	
 	for(int i= 0; i<Runden / 2; i++) {
-	vergleichen(auswählen(DeckA[i]), passenderWert(DeckB[i], Auswahl));
+	vergleichen(auswählen(DeckA[i]), MitSpieler1.getPassenderWert(i, Auswahl));
 	auswertung(Auswahl, DeckA[i]);
-	auswertung(Auswahl, DeckB[i]);
+	auswertung(Auswahl, MitSpieler1.getAktuelleKarte(i));
 	i++;
-	vergleichen(CPU(DeckB[i]), passenderWert(DeckA[i], Auswahl));
+	vergleichen(MitSpieler1.selectWert(DeckB[i]), passenderWert(DeckA[i], MitSpieler1.getLetzteWahl()));
 	auswertung(Auswahl, DeckA[i]);
-	auswertung(Auswahl, DeckB[i]);
+	auswertung(Auswahl, MitSpieler1.getAktuelleKarte(i));
 		}	
 	System.out.println("Sie haben"+ PunkteA +"Punkte, der Computer hat"+ PunkteB +"Punkte.");
 	}
@@ -59,7 +61,7 @@ public class Spiel {
 	System.out.println("Sie haben sich für" + Runden + "Runden entschieden, viel Spaß.");
 		}
 	
-	private static void austeilen(Karte SpielKarten[]) {
+	private static void austeilen(Karte SpielKarten[], Spieler Mitspieler) {
 		Karte[] temp = SpielKarten.clone();
 		Karte[] Gemischt = arrayMix(temp);
 		for(int i=0; i< Deck.length/2; i++)
@@ -71,7 +73,7 @@ public class Spiel {
 		for(int i=Deck.length/2; i<= Deck.length; i++)
 		{
 			if(i%2 == 0) {
-				DeckB[i] = Gemischt[i];
+				Mitspieler.setAktuelleKarte(Gemischt[i], i);
 			}
 		}
 		
@@ -133,24 +135,6 @@ public class Spiel {
 		return passenderWert(oben, Auswahl);
 	}
 	
-	private static int CPU (Karte oben) {
-			Random random = new Random();	
-		int wert = random.nextInt(3);
-		int x = 0;
- 			switch(wert) {
-			case 1 : 
-				x = oben.getAttribut1();
-				break;
-			case 2 :
-				x = oben.getAttribut2();
-				break;
-			case 3: 
-				x = oben.getAttribut3();
-				break;
-				}
-			return x;
-	
-	}
 	
 	private static void auswertung(int Nummer, Karte oben) {
 		System.out.println("Das ausgew�hlte Attribut war" + passenderName(oben, Auswahl) + "mit einem Wert von" + passenderWert(oben, Auswahl));
