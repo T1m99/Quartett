@@ -9,9 +9,9 @@ public class Spiel {
 	private static int Runden;
 	private static int Auswahl;
 	private static boolean Anfangen = true;
-	private static Karte[] Deck = new Karte[7];// Dimension Anpassen;
-	private static Karte[] DeckA = new Karte[Deck.length / 2];// Dimension Anpassen;
-	private static Karte[] DeckB = new Karte[Deck.length / 2];// Dimension Anpassen;
+	private static Karte[] Deck = new Karte[12];// Dimension Anpassen;
+	private static Karte[] DeckA = new Karte[Deck.length / 2];
+	private static Karte[] DeckB = new Karte[Deck.length / 2];
 	static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -29,6 +29,7 @@ public class Spiel {
 		 
 		Spieler MitSpieler1 = new Spieler("Tim", DeckB);
 
+		
 		RundenAbfrage();
 		austeilen(Deck, MitSpieler1);
 		
@@ -74,30 +75,28 @@ public class Spiel {
 	}
 
 	private static void austeilen(Karte SpielKarten[], Spieler Mitspieler) {
-		Karte[] temp = SpielKarten.clone();
-		Karte[] Gemischt = arrayMix(temp);
-		for (int i = 0; i < Deck.length / 2; i++) {
+		Karte[] Gemischt = SpielKarten;
+		for (int i = 0; i < Deck.length; i++) {
 			if (i % 2 == 0) {
-				DeckA[i] = Gemischt[i];
-			}
+				if (i<2) {DeckA[i] = Gemischt[i];
+				}
+			}			//Logik Fehler drinnen
 		}
-		for (int i = Deck.length / 2; i <Deck.length; i++) {
+		for (int i =0 ; i <Deck.length; i++) {
 			if (i % 2 != 0) {
-				Mitspieler.setAktuelleKarte(Gemischt[i], i - (Deck.length/2));
+				Mitspieler.setAktuelleKarte(Gemischt[i], i/2);
 			}
 		}
 
 	}
 
 	private static Karte[] arrayMix(Karte[] zahlen) {
-		Karte tmp;
-		int rand;
 		Random r = new Random();
 		for (int i = 0; i < zahlen.length; i++) {
-			rand = r.nextInt(zahlen.length);
-			tmp = zahlen[i];
-			zahlen[i] = zahlen[rand];
-			zahlen[rand] = tmp;
+			int	rand = r.nextInt(zahlen.length);
+			Karte tmp = zahlen[rand ];
+			zahlen[rand] = zahlen[i];
+			zahlen[i] = tmp;
 		}
 		return zahlen;
 	}
@@ -148,6 +147,7 @@ public class Spiel {
 
 	}
 // Attribut Namen einfügen und schöner ausgeben.
+	
 	private static void karteAnzeigen(Karte aktuell) { 
 		System.out.println("Ihre Karte:" + aktuell.getName() + "\n");
 		System.out.println("Ihre Karte hat folgende Werte:");
@@ -174,10 +174,10 @@ public class Spiel {
 	private static void RundeSpielen(int RundenNummer, Spieler Gegner) {
 		if(Anfangen == true) {
 			System.out.println("Sie sind an der Reihe");
-			karteAnzeigen(DeckA[RundenNummer]);
+			//karteAnzeigen(DeckA[RundenNummer]);
 			vergleichen(auswÃ¤hlen(DeckA[RundenNummer]),Gegner.getPassenderWert(RundenNummer, Auswahl));			
 		} else if(Anfangen == false) {
-			karteAnzeigen(DeckA[RundenNummer]);
+			//karteAnzeigen(DeckA[RundenNummer]);
 			Gegner.selectWert(Gegner.getAktuelleKarte(RundenNummer));
 			System.out.println("DerComputer hat Attribut: " + Gegner.getAuswahl() + "Mit einem Wert von " + Gegner.getPassenderWert(RundenNummer, Gegner.getAuswahl()) + "ausgewählt.");
 			vergleichen(Gegner.getPassenderWert(RundenNummer, Gegner.getAuswahl()), passenderWert(DeckA[RundenNummer], Gegner.getAuswahl()));

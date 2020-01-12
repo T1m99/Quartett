@@ -3,27 +3,12 @@ package Spiel;
 import java.util.Random;
 
 public class Spieler {
-	private boolean letzteRundeGewonnen = false;
 	private int letzteWahl;
 	private Karte[] DeckB;
 	private int Auswahl;
 	public Spieler(String Name, Karte[] KartenSet) {
 		
 		this.DeckB=KartenSet;
-	}
-	
-	public boolean getStatus() {
-		
-		return letzteRundeGewonnen;
-	}
-	
-	public void changeStatus() {
-		
-		if(letzteRundeGewonnen == true) {
-			letzteRundeGewonnen = false;			
-		} else {
-			letzteRundeGewonnen = true;
-		}
 	}
 	
 	public int selectWert(Karte oben) {
