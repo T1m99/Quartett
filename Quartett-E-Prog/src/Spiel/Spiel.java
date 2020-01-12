@@ -8,6 +8,7 @@ public class Spiel {
 	private static int PunkteB;
 	private static int Runden;
 	private static int Auswahl;
+	private static boolean Anfangen = true;
 	private static Karte[] Deck = new Karte[7];// Dimension Anpassen;
 	private static Karte[] DeckA = new Karte[Deck.length / 2];// Dimension Anpassen;
 	private static Karte[] DeckB = new Karte[Deck.length / 2];// Dimension Anpassen;
@@ -30,17 +31,25 @@ public class Spiel {
 
 		RundenAbfrage();
 		austeilen(Deck, MitSpieler1);
-		karteAnzeigen(DeckB[2]);
-		vergleichen(auswählen(DeckB[2]), passenderWert(DeckA[2], 4));
-		System.out.println("Sie haben " + PunkteA + " Punkte, der Computer hat " + PunkteB + " Punkte.");
+		
+		for(int i = 0; i< Runden; i++) {
+			
+			RundeSpielen(i, MitSpieler1);
+		}
+		
+		
 
 	} 
 
 	private static void vergleichen(int wertSpielerA, int wertSpielerB) {
 		if (wertSpielerA < wertSpielerB) {
 			PunkteB++;
+			Anfangen= false;
+			System.out.println("Spieler B gewinnt");
 		} else if (wertSpielerA > wertSpielerB) {
 			PunkteA++;
+			Anfangen = true;
+			System.out.println("Spieler A Gewinnt");
 		}
 
 	}
@@ -160,5 +169,19 @@ public class Spiel {
 	private static void setRundenZahl(int Zahl){
 		
 		Runden = Zahl;
+	}
+	
+	private static void RundeSpielen(int RundenNummer, Spieler Gegner) {
+		if(Anfangen == true) {
+			System.out.println("Sie sind an der Reihe");
+			karteAnzeigen(DeckA[RundenNummer]);
+			vergleichen(auswählen(DeckA[RundenNummer]),Gegner.getPassenderWert(RundenNummer, Auswahl));			
+		} else if(Anfangen == false) {
+			karteAnzeigen(DeckA[RundenNummer]);
+			Gegner.selectWert(Gegner.getAktuelleKarte(RundenNummer));
+			System.out.println("DerComputer hat Attribut: " + Gegner.getAuswahl() + "Mit einem Wert von " + Gegner.getPassenderWert(RundenNummer, Gegner.getAuswahl()) + "ausgew�hlt.");
+			vergleichen(Gegner.getPassenderWert(RundenNummer, Gegner.getAuswahl()), passenderWert(DeckA[RundenNummer], Gegner.getAuswahl()));
+			}
+		
 	}
 }

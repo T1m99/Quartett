@@ -6,6 +6,7 @@ public class Spieler {
 	private boolean letzteRundeGewonnen = false;
 	private int letzteWahl;
 	private Karte[] DeckB;
+	private int Auswahl;
 	public Spieler(String Name, Karte[] KartenSet) {
 		
 		this.DeckB=KartenSet;
@@ -32,12 +33,15 @@ public class Spieler {
  			switch(wert) {
 			case 1 : 
 				x = oben.getAttribut1();
+				Auswahl =1;
 				break;
 			case 2 :
 				x = oben.getAttribut2();
+				Auswahl=2;
 				break;
 			case 3: 
 				x = oben.getAttribut3();
+				Auswahl=3;
 				break;
 				}
  			letzteWahl=wert;
@@ -72,5 +76,9 @@ public class Spieler {
 			break;
 			}
 		return x;
+	}
+	public int getAuswahl() {
+		
+		return Auswahl;
 	}
 }
