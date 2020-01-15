@@ -34,7 +34,7 @@ public class Spiel {
 		// Das eigentliche "Spiel"
 		RundenAbfrage();
 		austeilen(Deck, MitSpieler1);
-		System.out.print("\033[H\033[2J");
+		consoleClear();
 
 		for (int i = 0; i < Runden; i++) {
 
@@ -207,7 +207,7 @@ public class Spiel {
 
 	// Da keine Methode bekannt ist die Console zu leeren
 	// müssen wir uns mit leerzeilen behelfen
-	private void consoleClear() {
+	private static void consoleClear() {
 		for (int i = 0; i < 20; i++)
 			System.out.println("\n");
 	}
