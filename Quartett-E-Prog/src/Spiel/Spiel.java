@@ -9,7 +9,7 @@ public class Spiel {
 	private static int Runden;
 	private static int Auswahl;
 	private static boolean Anfangen = true;
-	private static Karte[] Deck = new Karte[12];// Dimension Anpassen;
+	private static Karte[] Deck = new Karte[4];// Dimension Anpassen;
 	private static Karte[] DeckA = new Karte[Deck.length / 2];
 	private static Karte[] DeckB = new Karte[Deck.length / 2];
 	static Scanner scanner = new Scanner(System.in);
@@ -21,11 +21,11 @@ public class Spiel {
 		 Karte Karte2 = new Karte("Karte 2",75,7,2);
 		 Karte Karte3 = new Karte("Karte 3",6,435,87);
 		 Karte Karte4 = new Karte("Karte 4",6,2,8);    
-// Karten in Array einfügen		 
-		 einfügen(Karte1);
-		 einfügen(Karte2);
-		 einfügen(Karte3);
-		 einfügen(Karte4);
+// Karten in Array einfÃ¼gen		 
+		 einfÃ¼gen(Karte1);
+		 einfÃ¼gen(Karte2);
+		 einfÃ¼gen(Karte3);
+		 einfÃ¼gen(Karte4);
 		 
 		Spieler MitSpieler1 = new Spieler("Tim", DeckB);
 
@@ -54,7 +54,7 @@ public class Spiel {
 		}
 
 	}
-// Runden anzahlen überdenken -> muss gerade Anzahl sein.
+// Runden anzahlen ï¿½berdenken -> muss gerade Anzahl sein.
 	private static void RundenAbfrage() 
 	{
 		System.out
@@ -71,20 +71,25 @@ public class Spiel {
 			setRundenZahl(6);
 			break;
 		}
-		System.out.println("Sie haben sich für " + Runden + " Runden entschieden, viel Spaß. \n");
+		System.out.println("Sie haben sich fï¿½r " + Runden + " Runden entschieden, viel Spaï¿½. \n");
 	}
 
 	private static void austeilen(Karte SpielKarten[], Spieler Mitspieler) {
 		Karte[] Gemischt = SpielKarten;
 		for (int i = 0; i < Deck.length; i++) {
+			int z=0;
 			if (i % 2 == 0) {
-				if (i<2) {DeckA[i] = Gemischt[i];
-				}
+				
+				DeckA[i/2]=Gemischt[i];
+				z++	;
 			}			//Logik Fehler drinnen
 		}
 		for (int i =0 ; i <Deck.length; i++) {
+			int z=0;
 			if (i % 2 != 0) {
-				Mitspieler.setAktuelleKarte(Gemischt[i], i/2);
+				
+				Mitspieler.setAktuelleKarte(Gemischt[i], (i-1)/2);
+				z++;	
 			}
 		}
 
@@ -116,7 +121,7 @@ public class Spiel {
 		}
 		return x;
 	}
-// Attribut Namen einfügen
+// Attribut Namen einfï¿½gen
 	private static String passenderName(Karte oben, int Nummer) { 
 		String x = "";
 		switch (Nummer) {
@@ -136,17 +141,17 @@ public class Spiel {
 	private static int auswÃ¤hlen(Karte oben) {
 
 		karteAnzeigen(oben);
-		System.out.println("\n Sie können einen Wert durch eingeben der Nummer auswählen");
+		System.out.println("\n Sie kï¿½nnen einen Wert durch eingeben der Nummer auswï¿½hlen");
 		Auswahl = scanner.nextInt();
 		return passenderWert(oben, Auswahl);
 	}
 
 	private static void auswertung(int Nummer, Karte oben) {
-		System.out.println("Das ausgewählte Attribut war" + passenderName(oben, Auswahl) + "mit einem Wert von"
+		System.out.println("Das ausgewï¿½hlte Attribut war" + passenderName(oben, Auswahl) + "mit einem Wert von"
 				+ passenderWert(oben, Auswahl));
 
 	}
-// Attribut Namen einfügen und schöner ausgeben.
+// Attribut Namen einfï¿½gen und schï¿½ner ausgeben.
 	
 	private static void karteAnzeigen(Karte aktuell) { 
 		System.out.println("Ihre Karte:" + aktuell.getName() + "\n");
@@ -158,7 +163,7 @@ public class Spiel {
 	}
 
 	
-	private static void einfügen(Karte neu) {
+	private static void einfÃ¼gen(Karte neu) {
 		int i= 0;
 		while(Deck[i]!= null) {
 			i++;			
@@ -179,7 +184,7 @@ public class Spiel {
 		} else if(Anfangen == false) {
 			//karteAnzeigen(DeckA[RundenNummer]);
 			Gegner.selectWert(Gegner.getAktuelleKarte(RundenNummer));
-			System.out.println("DerComputer hat Attribut: " + Gegner.getAuswahl() + "Mit einem Wert von " + Gegner.getPassenderWert(RundenNummer, Gegner.getAuswahl()) + "ausgewählt.");
+			System.out.println("DerComputer hat Attribut: " + Gegner.getAuswahl() + "Mit einem Wert von " + Gegner.getPassenderWert(RundenNummer, Gegner.getAuswahl()) + "ausgewï¿½hlt.");
 			vergleichen(Gegner.getPassenderWert(RundenNummer, Gegner.getAuswahl()), passenderWert(DeckA[RundenNummer], Gegner.getAuswahl()));
 			}
 		
