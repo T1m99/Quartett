@@ -1,4 +1,4 @@
-package Spiel;
+package spiel;
 
 public class Karte {
 	private int Attribut1;
