@@ -23,10 +23,10 @@ public class Spiel {
 		Karte Karte4 = new Karte("Karte 4", 6, 2, 8);
 
 		// Karten in Array einfügen
-		einfügen(Karte1);
-		einfügen(Karte2);
-		einfügen(Karte3);
-		einfügen(Karte4);
+		einfuegen(Karte1);
+		einfuegen(Karte2);
+		einfuegen(Karte3);
+		einfuegen(Karte4);
 
 		// Mitspieler erstellen
 		Spieler MitSpieler1 = new Spieler("Player1", DeckB);
@@ -175,7 +175,7 @@ public class Spiel {
 	}
 
 	// neue Karten werden in das Hauptdeck eingefügt
-	private static void einfügen(Karte neu) {
+	private static void einfuegen(Karte neu) {
 		int i = 0;
 		while (Deck[i] != null) {
 			i++;
