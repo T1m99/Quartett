@@ -17,16 +17,12 @@ public class Spiel {
 	public static void main(String[] args) {
 
 // Karten erstellen.
-		Karte Karte1 = new Karte("Karte 1", 1, 3, 7);
-		Karte Karte2 = new Karte("Karte 2", 75, 7, 2);
-		Karte Karte3 = new Karte("Karte 3", 6, 435, 87);
-		Karte Karte4 = new Karte("Karte 4", 6, 2, 8);
+		Deck[1]= new Karte("Karte 1", 1, 3, 7);
+		Deck[0]= new Karte("Karte 2", 75, 7, 2);
+		Deck[2]= new Karte("Karte 3", 6, 435, 87);
+		Deck[3]= new Karte("Karte 4", 6, 2, 8);
 
-		// Karten in Array einfügen
-		einfuegen(Karte1);
-		einfuegen(Karte2);
-		einfuegen(Karte3);
-		einfuegen(Karte4);
+		
 
 		// Mitspieler erstellen
 		Spieler MitSpieler1 = new Spieler("Player1", DeckB);
@@ -34,7 +30,7 @@ public class Spiel {
 		// Das eigentliche "Spiel"
 		RundenAbfrage();
 		austeilen(Deck, MitSpieler1);
-		consoleClear();
+		//consoleClear();
 
 		for (int i = 0; i < Runden; i++) {
 
@@ -55,7 +51,7 @@ public class Spiel {
 			PunkteA++;
 			Anfangen = true;
 			System.out.println("Spieler A Gewinnt");
-		}
+		}else System.out.println("klassisches Unentschieden");
 
 	}
 
@@ -80,24 +76,25 @@ public class Spiel {
 
 	// Das KartenSpiel wird auf beide Spieler aufgeteilt
 	private static void austeilen(Karte SpielKarten[], Spieler Mitspieler) {
-		Karte[] Gemischt = SpielKarten;
+		
 		for (int i = 0; i < Deck.length; i++) {
 
 			if (i % 2 == 0) {
 
-				DeckA[i / 2] = Gemischt[i];
+				DeckA[i / 2] = SpielKarten[i];
 
 			}
-			for (int v = 0; i < Deck.length; i++) {
+		}
+			for (int v = 0; v < Deck.length; v++) {
 
 				if (v % 2 != 0) {
 
-					Mitspieler.setAktuelleKarte(Gemischt[v], (v - 1) / 2);
+					Mitspieler.setAktuelleKarte(SpielKarten[v], (v/2));
 
 				}
 			}
 
-		}
+		
 	}
 
 	// Das Array wird gemischt ( wie ein KartenSpiel)
@@ -172,15 +169,6 @@ public class Spiel {
 		System.out.println("2-A2:" + aktuell.getAttribut2());
 		System.out.println("3-A3:" + aktuell.getAttribut3());
 
-	}
-
-	// neue Karten werden in das Hauptdeck eingefügt
-	private static void einfuegen(Karte neu) {
-		int i = 0;
-		while (Deck[i] != null) {
-			i++;
-		}
-		Deck[i] = neu;
 	}
 
 	// Die Rundenzahl wird gespeichert
