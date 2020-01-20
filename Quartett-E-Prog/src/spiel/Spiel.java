@@ -36,6 +36,8 @@ public class Spiel {
 
 			RundeSpielen(i, MitSpieler1);
 		}
+		
+		GewinnerRausposaunen(MitSpieler1);
 
 	}
 
@@ -182,6 +184,7 @@ public class Spiel {
 			System.out.println("Sie sind an der Reihe");
 			// karteAnzeigen(DeckA[RundenNummer]);
 			vergleichen(auswählen(DeckA[RundenNummer]), Gegner.getPassenderWert(RundenNummer, Auswahl));
+			auswertung(RundenNummer, DeckA[RundenNummer]);
 		} else if (Anfangen == false) {
 			// karteAnzeigen(DeckA[RundenNummer]);
 			Gegner.selectWert(Gegner.getAktuelleKarte(RundenNummer));
@@ -198,5 +201,22 @@ public class Spiel {
 	private static void consoleClear() {
 		for (int i = 0; i < 20; i++)
 			System.out.println("\n");
+	}
+	
+	private static String GewinnerRausposaunen(Spieler Gegner) {
+			String Auswertung = null;
+		if (PunkteA > PunkteB) {
+			Auswertung = "Sie gewinnen mit " + PunkteA + ": " + PunkteB + ". Herzlichen Glückwunsch.";
+		} else if (PunkteB> PunkteA) {
+			Auswertung = Gegner.getName() + "gewinnt mit "+ PunkteA + ": " + PunkteB + ".";
+			
+		} else {
+			Auswertung = "Das Spiel endet Unentschieden mit" + PunkteA + ": " + PunkteB + ".";
+		}
+		
+		
+		return Auswertung;
+		
+		
 	}
 }

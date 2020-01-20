@@ -6,10 +6,12 @@ public class Spieler {
 	private int letzteWahl;
 	private Karte[] DeckB;
 	private int Auswahl;
+	private String Name;
 
 	public Spieler(String Name, Karte[] KartenSet) {
 
 		this.DeckB = KartenSet;
+		this.Name = Name;
 	}
 
 	// der CPU wählt durch eine Zufallszahl das zu spielende Attribut aus
@@ -72,5 +74,10 @@ public class Spieler {
 	public int getAuswahl() {
 
 		return Auswahl;
+	}
+	
+	public String getName() {
+		
+		return Name;
 	}
 }
