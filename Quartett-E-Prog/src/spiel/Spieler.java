@@ -3,7 +3,6 @@ package spiel;
 import java.util.Random;
 
 public class Spieler {
-	private int letzteWahl;
 	private Karte[] DeckB;
 	private int Auswahl;
 	private String Name;
@@ -33,16 +32,12 @@ public class Spieler {
 			Auswahl = 3;
 			break;
 		}
-		letzteWahl = wert;
+		Auswahl = wert;
 		return x;
 
 	}
 
 	// getter und setter für Attribute
-
-	public int getLetzteWahl() {
-		return letzteWahl;
-	}
 
 	public Karte getAktuelleKarte(int rundenZahl) {
 		return DeckB[rundenZahl];
